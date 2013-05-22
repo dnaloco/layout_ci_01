@@ -1,3 +1,11 @@
+<<<<<<< HEAD
 .project
 .settings
 user_guide
+=======
+*/config/development
+*/logs/log-*.php
+*/logs/!index.html
+*/cache/*
+*/cache/!index.html
+>>>>>>> e11ba21fabb440ca7d4699c03a3c53c058acf9aa
