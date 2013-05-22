@@ -2,45 +2,21 @@
 
 if(!defined('BASEPATH')) exit('no direct script access allowed');
 
-/**
- * Class that will render the view
- * 
- * @version 1.0
- * @since 05/2013
- * @license GPL
- * @author Arthur Santos Costa
- * @package Application
- * @subpackage libraries
- *
- */
-
 class Layout
 {
-	/**
-	 * 
-	 * CI get_instance() of Codeigniter
-	 * @var private
-	 * @see __construct()
-	 */
 	private $CI;
 	
 	private $theme;
-	
-	/**	 
-	 * @var private
-	 * @see set_title()
-	 */
+
 	private $title = '';
 	 
-	 /**
-	  * @var private
-	  * @see set_description()
-	  */
 	private $description = '';
 	
 	private $layouts = array();
 	
 	private $includes = array();
+	
+	private $menu = array();
 	
 	public function __construct()
 	{
@@ -66,10 +42,24 @@ class Layout
 		$this->description = $string;
 	}
 	
+	public function set_menu($menu=array()) 
+	{
+		foreach($menu as $menu_anchor=>$menu_title) 
+		{
+			$this->menu[] = anchor($menu_anchor, $menu_title);
+		}
+	}
+	
+	public function get_menu() 
+	{
+		return $this->menu;
+	}
+	
 	public function render($view_page, $params=array(), $widgets=array(), $default=TRUE)
 	{
 		$params['title_page'] = $this->title;
 		$params['description_page'] = $this->description;
+		$params['menu'] = $this->get_menu();
 		
 		if(is_array($widgets) && count($widgets) >= 1) 
 		{

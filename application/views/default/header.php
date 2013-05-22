@@ -31,5 +31,5 @@
 	<div id="wrapper_page">
 		<header id="header">
 			<h1 id="titulo_pagina"><?= $title_page ?></h1>
-			<p><?= $description_page ?></p>
+			<p>DESCRIÇÃO: <?= $description_page ?></p>
 		</header>

@@ -4,4 +4,35 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "normalize";
+@import "zen";
+@import "compass/reset";
+
+/*
+ * Fixed Styles
+ */
+body {
+  font-family: Helvetica, arial, sans-serif;
+  background-color: #c6c6c6;
+  h1 {
+    font-size: 30px;
+  }
+}
+
+#wrapper_page {
+  @include zen-grid-container;
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.wrapper {
+  @include zen-clear;
+}
+
+.container {
+  $zen-column-count: 6;
+  $zen-gutter-width: 10px;
+  @include zen-grid-container;
+}
+
 
