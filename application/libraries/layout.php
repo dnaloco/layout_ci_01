@@ -24,7 +24,7 @@ class Layout
 	 */
 	private $CI;
 	
-	private $theme = 'default';
+	private $theme;
 	
 	/**	 
 	 * @var private
@@ -46,6 +46,7 @@ class Layout
 	{
 		$this->CI =& get_instance();
 		$this->set_theme($this->theme);
+		$this->set_theme('default');
 	}
 	public function set_title($string)
 	{
@@ -53,7 +54,7 @@ class Layout
 	}
 	
 	public function set_theme($theme) {
-		$this->theme = 'themes/' . $theme . '/';
+		$this->theme = $theme . '/';
 	}
 	
 	public function get_theme() {
@@ -64,27 +65,26 @@ class Layout
 	{
 		$this->description = $string;
 	}
-
-	public function render($view_page, $params=array(), $layouts=array(), $default=TRUE)
+	
+	public function render($view_page, $params=array(), $widgets=array(), $default=TRUE)
 	{
 		$params['title_page'] = $this->title;
 		$params['description_page'] = $this->description;
 		
-		if(is_array($layouts) && count($layouts) >= 1) 
+		if(is_array($widgets) && count($widgets) >= 1) 
 		{
-			foreach($layouts as $layout_key => $layout)
+			foreach($widgets as $widget_key => $widget)
 			{
-				$params[$layout_key] = $this->CI->load->view($layout, $params, true);
+				$view = $this->get_theme() . $widget;
+				$params[$widget_key] = $this->CI->load->view($view, $params, true);
 			}
 		}
-		
+
 		if($default)
 		{
 			$this->CI->load->view($this->get_theme() . 'header', $params);
 			$this->CI->load->view($this->get_theme() . 'nav', $params);
-			echo "<div id='#main_content'>";
 			$this->CI->load->view($this->get_theme() . $view_page, $params);
-			echo "</div>";
 			$this->CI->load->view($this->get_theme() . 'footer', $params);
 		}
 		else 
