@@ -15,9 +15,16 @@ class Site extends CI_Controller {
 				'site' => 'Home',
 				'site/sobre' => 'Sobre',
 				'site/servicos' => 'Servicos',
+				'artigos' => array (
+					'Artigos',
+					'artigos/Novidades' => 'Novidades',
+					'artigos/Curiosidades' => 'Curiosidades',
+					'artigos/Noticias' => 'Noticias'
+				),
+			
 				'admin' => 'Admin',
 				'site/contato' => 'Contato'
-			)
+			)	
 		);
 		
 		$widgets = array (
@@ -32,7 +39,7 @@ class Site extends CI_Controller {
 	{
 		//layout view[string], paramas[array], widgets[array], default[boolean]
 		$this->layout->set_title('Home');
-		$this->layout->set_description('Lorem ipsum dolor sit amet, consectetur adipisicing.');
+		$this->layout->set_description('Página Principal.');
 		
 		$data = array(
 			'nome' => 'Arthur Santos Costa',

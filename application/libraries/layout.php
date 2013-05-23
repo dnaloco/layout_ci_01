@@ -25,6 +25,7 @@ class Layout
 		$this->CI =& get_instance();
 		$this->set_theme($this->theme);
 		$this->set_theme('default');
+		
 	}
 	public function set_title($string)
 	{
@@ -43,12 +44,26 @@ class Layout
 	{
 		$this->description = $string;
 	}
-	
+	// Permite até dois níveis
 	public function set_menu($menu=array()) 
 	{
-		foreach($menu as $menu_anchor=>$menu_title) 
+		foreach($menu as $menu_anchor => $menu_title) 
 		{
-			$this->menu[] = anchor($menu_anchor, $menu_title);
+			if (!is_array($menu_title)) 
+			{
+				$this->menu[] ='<li>' . anchor($menu_anchor, $menu_title) . '</li>';				
+			} 
+			else 
+			{
+				$this->menu[] = '<li>' . anchor($menu_anchor, $menu_title[0]);
+				array_shift($menu_title);
+				$this->menu[] = '<ul>';
+				foreach($menu_title as $sec_menu_anchor => $sec_menu_title)
+				{
+					$this->menu[] = '<li>' . anchor($sec_menu_anchor, $sec_menu_title) . '</li>';
+				}
+				$this->menu[] = '</ul></li>';
+			}	
 		}
 	}	
 	

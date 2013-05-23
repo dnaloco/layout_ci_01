@@ -1,13 +1,12 @@
-<?php
+<?php 
 
 if(!defined('BASEPATH')) exit ('no direct script access allowed');
 
 /**
  * 
  */
-class Admin extends CI_Controller {
-	
-	function __construct() {
+class Artigos extends CI_Controller {
+	public function __construct() {
 		parent::__construct();
 		
 		$this->layout->set_menu(
@@ -35,11 +34,17 @@ class Admin extends CI_Controller {
 		$this->layout->set_widgets($widgets);
 	}
 	
-	public function index()
+	public function index($value='')
 	{
-		$this->layout->set_title('Página Administrativa');
-		$this->layout->set_description('Página RESTRITA');
-		$data['url_atual'] = $this->uri->segment(1) . '/' . $this->uri->segment(2);	
-	 	$this->layout->render('admin/admin.php', $data);
+	  	$this->layout->set_title('Artigos');
+		$this->layout->set_description('Página de Artigos.');
+		
+		$data = array(
+			'nome' => 'Arthur Santos Costa',
+			'idade' => '28 anos',
+			'url_atual' => $this->uri->segment(1) . '/' . $this->uri->segment(2)
+		);
+		
+		$this->layout->render('artigos/artigos.php',$data);
 	}
 }
