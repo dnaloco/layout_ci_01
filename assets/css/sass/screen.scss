@@ -24,15 +24,37 @@ body {
   margin: auto;
   margin-top: 10px;
 }
-
-.wrapper {
-  @include zen-clear;
-}
-
 .container {
   $zen-column-count: 6;
   $zen-gutter-width: 10px;
   @include zen-grid-container;
 }
+
+.content {
+  @include zen-grid-item(4,1);
+}
+
+.sidebar {
+  @include zen-grid-item(2,5);
+}
+
+.menu_site {
+  @include zen-grid-container;
+  list-style: none;
+  li {
+    position: relative;
+    float: left;
+    a {
+      display: block;
+    }
+    ul {
+      position: absolute;
+      display: none;
+    }
+  }
+}
+
+
+
 
 

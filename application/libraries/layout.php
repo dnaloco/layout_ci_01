@@ -18,6 +18,8 @@ class Layout
 	
 	private $menu = array();
 	
+	private $widgets = array();
+	
 	public function __construct()
 	{
 		$this->CI =& get_instance();
@@ -48,38 +50,32 @@ class Layout
 		{
 			$this->menu[] = anchor($menu_anchor, $menu_title);
 		}
-	}
+	}	
 	
-	public function get_menu() 
+	public function set_widgets($widgets=array()) 
 	{
-		return $this->menu;
+		$this->widgets = $widgets;
 	}
 	
-	public function render($view_page, $params=array(), $widgets=array(), $default=TRUE)
+	public function render($view_page, $params=array())
 	{
 		$params['title_page'] = $this->title;
 		$params['description_page'] = $this->description;
-		$params['menu'] = $this->get_menu();
+		$params['menu'] = $this->menu;
 		
-		if(is_array($widgets) && count($widgets) >= 1) 
+		if(is_array($this->widgets) && count($this->widgets) >= 1) 
 		{
-			foreach($widgets as $widget_key => $widget)
+			foreach($this->widgets as $widget_key => $widget)
 			{
 				$view = $this->get_theme() . $widget;
 				$params[$widget_key] = $this->CI->load->view($view, $params, true);
 			}
 		}
 
-		if($default)
-		{
-			$this->CI->load->view($this->get_theme() . 'header', $params);
-			$this->CI->load->view($this->get_theme() . 'nav', $params);
-			$this->CI->load->view($this->get_theme() . $view_page, $params);
-			$this->CI->load->view($this->get_theme() . 'footer', $params);
-		}
-		else 
-		{
-			$this->CI->load->view($this->get_theme() . $view_page, $params);
-		}
+		$this->CI->load->view($this->get_theme() . 'header', $params);
+		$this->CI->load->view($this->get_theme() . 'nav', $params);
+		$this->CI->load->view($this->get_theme() . $view_page, $params);
+		$this->CI->load->view($this->get_theme() . 'footer', $params);
+
 	}
 }

@@ -32,4 +32,12 @@
 		<header id="header">
 			<h1 id="titulo_pagina"><?= $title_page ?></h1>
 			<p>DESCRIÇÃO: <?= $description_page ?></p>
+			<br />
+			olá <?php 
+			if($this->session->userdata('username')) {
+				echo 'usuário ' . $this->session->userdata('username');
+			} else {
+				echo "visitante";
+			}
+			?>
 		</header>

@@ -9,12 +9,23 @@ class Site extends CI_Controller {
 	
 	function __construct() {
 		parent::__construct();
+		
 		$this->layout->set_menu(
 			array(
 				'site' => 'Home',
-				'site/teste' => 'Teste'
+				'site/sobre' => 'Sobre',
+				'site/servicos' => 'Servicos',
+				'admin' => 'Admin',
+				'site/contato' => 'Contato'
 			)
 		);
+		
+		$widgets = array (
+			'novidades' => 'widget/novidades',
+			'login'		=> 'widget/login',
+		);
+		
+		$this->layout->set_widgets($widgets);
 	}
 	
 	public function index()
@@ -25,19 +36,34 @@ class Site extends CI_Controller {
 		
 		$data = array(
 			'nome' => 'Arthur Santos Costa',
-			'idade' => '28 anos'
+			'idade' => '28 anos',
+			'url_atual' => $this->uri->segment(1) . '/' . $this->uri->segment(2)
 		);
 		
-		$widgets = array (
-			'novidades' => 'widget/novidades',
-		);
-		
-		$this->layout->render('site/home.php',$data, $widgets);
+		$this->layout->render('site/home.php',$data);
 	}
 	
-	public function teste()
+	public function sobre()
 	{
-		$this->layout->set_title('Teste');
-		$this->layout->render('site/teste.php');
+		$this->layout->set_title('Sobre Mim');
+		$this->layout->set_description('Informações sobre a minha pessoa');
+		$data['url_atual'] = $this->uri->segment(1) . '/' . $this->uri->segment(2);
+	  	$this->layout->render('site/sobre.php', $data);
 	}
+	
+	public function servicos()
+	{
+		$this->layout->set_title('Serviços');
+		$this->layout->set_description('Informações sobre o meu trabalho');
+		$data['url_atual'] = $this->uri->segment(1) . '/' . $this->uri->segment(2);
+	  	$this->layout->render('site/servicos.php', $data);
+	}
+	
+	public function contato()
+	{
+		$this->layout->set_title('Contato');
+		$this->layout->set_description('Uma página para os usuários entrarem em contato comigo');
+		$data['url_atual'] = $this->uri->segment(1) . '/' . $this->uri->segment(2);
+	  	$this->layout->render('site/contato.php', $data);
+	}	
 }
