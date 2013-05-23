@@ -35,6 +35,14 @@ class Site extends CI_Controller {
 		$this->layout->set_widgets($widgets);
 	}
 	
+	public function _remap($method)
+	{
+		if($method == 'test')
+			echo "TESTE";
+		else
+			$this->$method();
+	}
+	
 	public function index()
 	{
 		//layout view[string], paramas[array], widgets[array], default[boolean]
